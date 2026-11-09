@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0706">
+  <title>Vintage Romance — An Interactive Love Story</title>
+  <meta name="description" content="An interactive cinematic love story in eight chapters.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:,">
+  <link rel="preload" as="image" href="assets/s1_station.webp">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Shared SVG filters -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="cloudy" x="-20%" y="-40%" width="140%" height="180%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G" result="disp"/>
+        <feGaussianBlur in="disp" stdDeviation="1.4"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <div id="app">
+    <!-- ============ INTRO ============ -->
+    <section class="scene scene-intro is-active" data-scene="0" aria-label="Opening titles">
+      <div class="intro-glow"></div>
+      <div class="intro-rays"></div>
+      <div class="intro-inner">
+        <p class="eyebrow">A film in eight chapters</p>
+        <h1 class="intro-title"><span>Vintage</span><em>Romance</em></h1>
+        <div class="ornament" aria-hidden="true">
+          <svg viewBox="0 0 240 24"><path d="M0 12 H92 M148 12 H240" stroke="currentColor" stroke-width="1"/><path d="M120 2 L130 12 L120 22 L110 12 Z" fill="none" stroke="currentColor"/><circle cx="120" cy="12" r="2.5" fill="currentColor"/><circle cx="100" cy="12" r="1.6" fill="currentColor"/><circle cx="140" cy="12" r="1.6" fill="currentColor"/></svg>
+        </div>
+        <p class="intro-sub">An interactive love story in eight chapters — written for you.</p>
+        <button class="btn-gold" id="btn-begin" type="button">Begin the film</button>
+        <p class="intro-hint">Best experienced with sound on</p>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 1 — A MOMENT IN TIME ============ -->
+    <section class="scene s1" data-scene="1" aria-label="Chapter one: A moment in time">
+      <div class="film" id="s1-film">
+          <div class="shot" id="sh-station"><img src="assets/s1_station.webp" alt="A vintage European train station at golden hour, steam drifting over the platform" decoding="async"></div>
+          <div class="shot" id="sh-man"><img data-src="assets/s1_man.webp" alt="A young man in a long brown coat waiting on the platform" decoding="async"></div>
+          <div class="shot" id="sh-woman"><img data-src="assets/s1_woman.webp" alt="A young woman in a burgundy coat stepping down from the train" decoding="async"></div>
+          <div class="shot" id="sh-meet"><img data-src="assets/s1_meet.webp" alt="The young man and the young woman on the platform, noticing each other" decoding="async"></div>
+          <div class="shot" id="sh-eyes-him"><img data-src="assets/s1_eyes_him.webp" alt="Close-up of his eyes" decoding="async"></div>
+          <div class="shot" id="sh-eyes-her"><img data-src="assets/s1_eyes_her.webp" alt="Close-up of her eyes" decoding="async"></div>
+        <div class="steam" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="light-leak" aria-hidden="true"></div>
+        <div class="flare-bloom" aria-hidden="true"></div>
+      </div>
+      <div class="gold-dust s1-dust" data-dust="18"></div>
+      <div class="heart-pulse" id="heart-pulse"></div>
+    </section>
+
+    <!-- ============ SCENE 2 — WORDS FROM THE HEART ============ -->
+    <section class="scene s2" data-scene="2" aria-label="Chapter two: Words from the heart">
+      <div class="film" id="s2-film">
+          <div class="shot" id="sh-window"><img data-src="assets/s2_window.webp" alt="The young man sitting beside a window at dusk, the old city behind the glass" decoding="async"></div>
+        <div class="lamp-warm s2-lamp" aria-hidden="true"></div>
+        <div class="s2-shade" aria-hidden="true"></div>
+      </div>
+      <div class="s2-lines" aria-live="polite">
+        <p class="s2-line">Some people enter your life quietly...</p>
+        <p class="s2-line">And somehow, they become the most beautiful part of your thoughts.</p>
+        <p class="s2-line">I don't know when it started...</p>
+        <p class="s2-line">But something about you feels different.</p>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 3 — THE LETTER ============ -->
+    <section class="scene s3" data-scene="3" aria-label="Chapter three: The letter">
+      <div class="s3-table" id="s3-table">
+        <div class="wood"></div>
+        <div class="table-glow"></div>
+        <div class="candle candle-lg"><div class="flame"></div><div class="wax"></div></div>
+        <div class="petal-still p1"></div><div class="petal-still p2"></div><div class="petal-still p3"></div>
+
+        <div class="envelope-wrap" id="envelope">
+          <div class="env" id="env">
+            <div class="env-back"></div>
+            <div class="env-letter"><span>To My Lady</span></div>
+            <div class="env-front"></div>
+            <div class="env-flap"><div class="env-flap-face"></div></div>
+            <button class="seal" id="seal" type="button" aria-label="Break the wax seal to open the letter">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <defs><radialGradient id="waxg" cx="38%" cy="32%" r="70%"><stop offset="0" stop-color="#b8283f"/><stop offset=".6" stop-color="#7d1224"/><stop offset="1" stop-color="#4a0812"/></radialGradient></defs>
+                <g class="seal-half seal-l"><path d="M50 4 C 26 2, 6 20, 6 46 C 4 70, 22 94, 50 96 L 46 70 L 54 52 L 44 34 Z" fill="url(#waxg)"/></g>
+                <g class="seal-half seal-r"><path d="M50 4 C 74 2, 96 22, 94 48 C 96 72, 76 96, 50 96 L 46 70 L 54 52 L 44 34 Z" fill="url(#waxg)"/></g>
+                <g class="seal-emblem"><circle cx="50" cy="50" r="27" fill="none" stroke="#d9b56a" stroke-width="1.4" opacity=".75"/><text x="50" y="62" text-anchor="middle" font-family="Pinyon Script, cursive" font-size="34" fill="#e3c27a">R</text></g>
+              </svg>
+            </button>
+          </div>
+          <p class="env-hint">Touch the wax seal to open</p>
+        </div>
+
+        <article class="letter" id="letter" aria-live="polite">
+          <div class="letter-page page-1" id="letter-p1">
+            <p class="letter-heading">To My Lady</p>
+            <p class="letter-salute">My Lady,</p>
+            <p class="lt">I saw you from afar, and something about your beauty caught my attention. Your beautiful eyes hold a quiet charm, and your hairstyle adds a grace that is hard to overlook.</p>
+            <p class="lt">Though we have not yet spoken, you have left a beautiful impression in my thoughts.</p>
+            <p class="lt">I hope fate grants me another chance to see you again.</p>
+            <p class="letter-sign"><em>— A Gentleman Who Remembers</em></p>
+            <button class="btn-ink" id="btn-letter-continue" type="button">Continue <span aria-hidden="true">→</span></button>
+          </div>
+        </article>
+      </div>
+
+    </section>
+
+    <!-- ============ SCENE 4 — HER NAME IN THE SKY ============ -->
+    <section class="scene s4" data-scene="4" aria-label="Chapter four: Her name in the sky">
+      <div class="s3-table">
+        <div class="wood"></div>
+        <div class="table-glow"></div>
+        <div class="candle candle-lg"><div class="flame"></div><div class="wax"></div></div>
+        <div class="petal-still p1"></div><div class="petal-still p2"></div><div class="petal-still p3"></div>
+        <article class="letter show still" id="s4-letter" aria-hidden="true">
+          <div class="letter-page page-1 active">
+            <p class="letter-heading">To My Lady</p>
+            <p class="letter-salute">My Lady,</p>
+            <p class="lt">I saw you from afar, and something about your beauty caught my attention. Your beautiful eyes hold a quiet charm, and your hairstyle adds a grace that is hard to overlook.</p>
+            <p class="lt">Though we have not yet spoken, you have left a beautiful impression in my thoughts.</p>
+            <p class="lt">I hope fate grants me another chance to see you again.</p>
+            <p class="letter-sign"><em>— A Gentleman Who Remembers</em></p>
+            <button class="btn-ink" type="button" tabindex="-1">Continue <span aria-hidden="true">→</span></button>
+          </div>
+        </article>
+      </div>
+      <div class="s3-sky">
+        <div class="sky-sun"></div>
+        <div class="cloud-bank b1"></div><div class="cloud-bank b2"></div><div class="cloud-bank b3"></div><div class="cloud-bank b4"></div>
+        <div class="sky-name" id="s4-name" aria-label="Yuliyana"></div>
+      </div>
+      <div class="puffs" id="s4-puffs"></div>
+      <div class="plane" id="s4-plane"></div>
+    </section>
+
+    <!-- ============ SCENE 5 — THE INVITATION ============ -->
+    <section class="scene s5" data-scene="5" aria-label="Chapter five: The invitation">
+      <div class="s5-bg"></div>
+      <div class="s5-spot"></div>
+      <div class="gold-dust" data-dust="26"></div>
+      <div class="deco-frame">
+        <span class="deco-corner tl"></span><span class="deco-corner tr"></span><span class="deco-corner bl"></span><span class="deco-corner br"></span>
+        <p class="eyebrow">Chapter V · The Invitation</p>
+        <h2 class="question" id="s5-q">Would you give me a chance to take you on a date?</h2>
+        <div class="s5-actions">
+          <button class="btn-gold btn-yes" id="btn-yes" type="button">Yes</button>
+          <button class="btn-ghost btn-no" id="btn-no" type="button">No</button>
+        </div>
+        <div class="s5-wrap" id="s5-wrap">
+          <div class="rain-cloud" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="fly-tears" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="beau" id="s5-beau" data-mood="hope" role="img" aria-label="The young man, waiting for your answer">
+            <img data-m="hope" data-src="assets/c_hope.webp" alt="">
+            <img data-m="cry1" data-src="assets/c_cry1.webp" alt="">
+            <img data-m="cry2" data-src="assets/c_cry2.webp" alt="">
+            <img data-m="cry3" data-src="assets/c_cry3.webp" alt="">
+            <img data-m="happy" data-src="assets/c_happy.webp" alt="">
+          </div>
+          <div class="puddle"></div>
+        </div>
+        <p class="s5-plea" id="s5-plea" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 6 — CHOOSE YOUR DATE ============ -->
+    <section class="scene s6" data-scene="6" aria-label="Chapter six: Choose our date">
+      <div class="s6-bg"></div>
+      <div class="scene-scroll">
+        <header class="panel-head">
+          <p class="eyebrow">Chapter VI · Our Date</p>
+          <h2 class="panel-title">Choose our date</h2>
+          <p class="panel-sub">Three ways to begin a story. Pick the one that feels like ours.</p>
+        </header>
+        <div class="date-cards" role="radiogroup" aria-label="Date experience">
+          <button class="date-card dc-sunset" type="button" role="radio" aria-checked="false" data-exp="Sunset View">
+            <div class="dc-art">
+              <div class="sun-sky"></div><div class="sun-disc"></div><div class="sea"><span></span><span></span><span></span></div>
+              <svg class="dc-cliff" viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 120 L0 50 C 30 44, 50 30, 80 38 C 100 44, 110 60, 130 72 L 150 120 Z" fill="#2a0e14"/><path d="M40 44 C 40 20, 60 10, 74 12 C 90 6, 112 12, 108 26 C 100 32, 82 30, 64 28 C 56 30, 50 36, 46 44 Z" fill="#1d0a0e"/><rect x="58" y="24" width="3" height="20" fill="#1d0a0e"/></svg>
+              <svg class="dc-birds" viewBox="0 0 60 20" aria-hidden="true"><path d="M2 10 Q8 4 14 10 Q20 4 26 10 M34 6 Q38 2 42 6 Q46 2 50 6" stroke="#3a1218" stroke-width="1.6" fill="none"/></svg>
+            </div>
+            <div class="dc-body">
+              <span class="dc-it">By the sea, at golden hour</span>
+              <span class="dc-title">Sunset View</span>
+              <span class="dc-desc">Golden hour by the water, the sky slowly turning to honey and wine.</span>
+            </div>
+            <span class="dc-seal" aria-hidden="true">Chosen</span>
+          </button>
+          <button class="date-card dc-coffee" type="button" role="radio" aria-checked="false" data-exp="Coffee &amp; Conversation">
+            <div class="dc-art">
+              <div class="awning"></div>
+              <div class="cafe-glow"></div>
+              <div class="cafe-table"></div>
+              <div class="cup cup-a"><div class="steam"><i></i><i></i><i></i></div></div>
+              <div class="cup cup-b"><div class="steam"><i></i><i></i><i></i></div></div>
+            </div>
+            <div class="dc-body">
+              <span class="dc-it">In a quiet little café</span>
+              <span class="dc-title">Coffee &amp; Conversation</span>
+              <span class="dc-desc">A quiet corner, two small cups, and all the time in the world to talk.</span>
+            </div>
+            <span class="dc-seal" aria-hidden="true">Chosen</span>
+          </button>
+          <button class="date-card dc-dinner" type="button" role="radio" aria-checked="false" data-exp="Dinner Date">
+            <div class="dc-art">
+              <div class="string-lights"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="cloth"></div>
+              <div class="glass g-a"></div><div class="glass g-b"></div>
+              <div class="candle candle-xs c-a"><div class="flame"></div><div class="wax"></div></div>
+              <div class="candle candle-xs c-b"><div class="flame"></div><div class="wax"></div></div>
+            </div>
+            <div class="dc-body">
+              <span class="dc-it">By candlelight</span>
+              <span class="dc-title">Dinner Date</span>
+              <span class="dc-desc">Candlelight, a slow dinner, soft music and a table set for two.</span>
+            </div>
+            <span class="dc-seal" aria-hidden="true">Chosen</span>
+          </button>
+        </div>
+        <div class="panel-actions">
+          <button class="btn-gold" id="btn-s6-next" type="button" disabled>Choose our date</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 7 — DATE & TIME ============ -->
+    <section class="scene s7" data-scene="7" aria-label="Chapter seven: Date and time">
+      <div class="s7-bg"></div>
+      <div class="scene-scroll">
+        <header class="panel-head">
+          <p class="eyebrow">Chapter VII · The Day &amp; the Hour</p>
+          <h2 class="panel-title">Date &amp; time</h2>
+          <p class="panel-sub">Spin the calendar to a day, then set the golden clock.</p>
+        </header>
+        <div class="dt-grid">
+          <div class="dt-panel cal-panel">
+            <h3 class="dt-label">The Day</h3>
+            <div class="cal-wrap">
+              <div class="tear-cal" id="tear-cal" aria-hidden="true">
+                <div class="tc-rings"><i></i><i></i></div>
+                <div class="tc-head" id="tc-month">November</div>
+                <div class="tc-day" id="tc-day">9</div>
+                <div class="tc-week" id="tc-week">Monday</div>
+                <div class="tc-year" id="tc-year">2026</div>
+              </div>
+              <div class="wheel-wrap">
+                <button class="wheel-btn up" id="wheel-up" type="button" aria-label="Previous day"><svg viewBox="0 0 24 24"><path d="M6 15 L12 9 L18 15" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+                <div class="wheel" id="wheel" role="listbox" tabindex="0" aria-label="Choose a day"></div>
+                <button class="wheel-btn down" id="wheel-down" type="button" aria-label="Next day"><svg viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <div class="dt-panel clock-panel">
+            <h3 class="dt-label">The Hour</h3>
+            <div class="clock" id="clock"></div>
+            <div class="time-readout" id="time-readout" aria-live="polite">7:00 PM</div>
+            <div class="minute-chips" role="group" aria-label="Minutes">
+              <button type="button" class="chip" data-min="0">:00</button>
+              <button type="button" class="chip" data-min="15">:15</button>
+              <button type="button" class="chip" data-min="30">:30</button>
+              <button type="button" class="chip" data-min="45">:45</button>
+            </div>
+            <div class="ampm" role="group" aria-label="Morning or evening">
+              <button type="button" class="chip" data-pm="0">AM</button>
+              <button type="button" class="chip" data-pm="1">PM</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel-actions">
+          <button class="btn-gold" id="btn-review" type="button">Review &amp; Confirm</button>
+        </div>
+      </div>
+
+      <div class="modal" id="review-modal" role="dialog" aria-modal="true" aria-labelledby="ticket-title" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="ticket" id="ticket">
+          <div class="ticket-edge"></div>
+          <p class="eyebrow">A Rendezvous for Two</p>
+          <h3 class="ticket-title" id="ticket-title">An invitation for <span id="rv-name"></span></h3>
+          <dl class="ticket-rows">
+            <div><dt>The evening</dt><dd id="rv-exp"></dd></div>
+            <div><dt>The day</dt><dd id="rv-date"></dd></div>
+            <div><dt>The hour</dt><dd id="rv-time"></dd></div>
+          </dl>
+          <div class="ticket-actions">
+            <button class="btn-ghost" id="btn-edit" type="button">Change something</button>
+            <button class="btn-gold" id="btn-confirm" type="button">Confirm our date</button>
+          </div>
+          <div class="stamp" id="stamp" aria-hidden="true"><span>Confirmed</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 8 — WAITING FOR HER ============ -->
+    <section class="scene s8" data-scene="8" aria-label="Chapter eight: Waiting for her">
+      <div class="film" id="s8-film">
+          <div class="shot" id="sh-street"><img data-src="assets/s8_street.webp" alt="A vintage European street at dusk; the young man waits under a street lamp holding a single red rose" decoding="async"></div>
+          <div class="shot" id="sh-watch"><img data-src="assets/s8_watch.webp" alt="He looks at the wristwatch on his left wrist, the red rose in his other hand" decoding="async"></div>
+          <div class="shot" id="sh-look"><img data-src="assets/s8_look.webp" alt="He looks down the long lamplit street, hoping to see her" decoding="async"></div>
+        <div class="lamp-warm s8-lamp" aria-hidden="true"></div>
+      </div>
+      <div class="s8-shade" aria-hidden="true"></div>
+      <div class="s8-text">
+        <p class="s8-quote" id="s8-quote">Sometimes waiting is hard… but waiting for you is worth it.</p>
+        <p class="s8-details" id="s8-details"></p>
+        <button class="btn-ghost s8-replay" id="btn-replay" type="button">Watch the film again</button>
+        <p class="s8-credit">Music: Edward Elgar, “Salut d’Amour”, Op. 12 — Emanuel Salvador (violin) &amp; Pau Casan (piano), <a href="https://commons.wikimedia.org/wiki/File:Edward_Elgar_-_Salut_d%27amour,_Op._12_-_Emanuel_Salvador_and_Pau_Casan_(2011).ogg" target="_blank" rel="noopener">CC BY 3.0</a></p>
+      </div>
+    </section>
+
+    <!-- ============ CINEMA CHROME ============ -->
+    <div class="letterbox lb-top"></div>
+    <div class="letterbox lb-bottom"></div>
+    <p class="caption" id="caption" aria-live="polite"></p>
+
+    <header class="hud" id="hud">
+      <ol class="progress" id="progress" aria-label="Chapters"></ol>
+      <button class="sound-btn" id="sound-btn" type="button" aria-pressed="false" aria-label="Toggle sound">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 H8 L13 5 V19 L8 15 H4 Z" fill="currentColor"/><path class="wave" d="M16 9 Q18.5 12 16 15 M18.5 6.5 Q23 12 18.5 17.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path class="mute" d="M16 9 L21 15 M21 9 L16 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+    <button class="skip-btn" id="skip-btn" type="button">Skip scene <span aria-hidden="true">›</span></button>
+
+    <div class="veil" id="veil">
+      <div class="chapter-card" id="chapter-card">
+        <span class="cc-num" id="cc-num">Chapter I</span>
+        <span class="cc-rule"></span>
+        <h2 class="cc-title" id="cc-title">A Moment in Time</h2>
+        <span class="cc-sub" id="cc-sub">Where it all began</span>
+      </div>
+    </div>
+    <div class="atmo" aria-hidden="true">
+      <div class="atmo-warm"></div>
+      <div class="atmo-highlight"></div>
+      <div class="atmo-dust" id="atmo-dust"></div>
+    </div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+  </div>
+
+  <script src="script.js"></script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  const DEFAULT_LINE_HEIGHT = 16;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  const PICK_CAPABILITIES = ["pick"];
+  const PICK_CHAIN_LENGTH = 4;
+  const PICK_MAX_TEXT_CHARS = 120;
+  const PICK_MAX_HTML_CHARS = 300;
+
+  function truncate(value, maxChars) {
+    return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
+  }
+
+  function isPickableElement(element) {
+    return (
+      element instanceof Element &&
+      element !== document.documentElement &&
+      element !== document.body
+    );
+  }
+
+  function resolvePickTarget(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+    const element = document.elementFromPoint(x, y);
+    return isPickableElement(element) ? element.closest("svg") || element : null;
+  }
+
+  function pickLabel(element) {
+    if (element.id) return element.localName + "#" + element.id;
+    return [element.localName].concat(Array.from(element.classList).slice(0, 2)).join(".");
+  }
+
+  // Only attributes that help find the element in source. data-* values and URL
+  // query strings or fragments can carry tokens.
+  const PICK_ATTRIBUTES = new Set([
+    "id",
+    "class",
+    "name",
+    "type",
+    "role",
+    "alt",
+    "aria-label",
+    "href",
+    "src",
+  ]);
+
+  function pickAttributeValue(attribute) {
+    return attribute.name === "href" || attribute.name === "src"
+      ? attribute.value.split(/[?#]/)[0]
+      : attribute.value;
+  }
+
+  function describePickElement(element) {
+    const chain = [];
+    for (
+      let current = element;
+      isPickableElement(current) && chain.length < PICK_CHAIN_LENGTH;
+      current = current.parentElement
+    ) {
+      chain.unshift(current);
+    }
+    const attributes = Array.from(element.attributes)
+      .filter((attribute) => PICK_ATTRIBUTES.has(attribute.name))
+      .map((attribute) => ` ${attribute.name}="${pickAttributeValue(attribute).replace(/"/g, "&quot;")}"`)
+      .join("");
+    const text = (element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+    return {
+      chain: chain.map(pickLabel),
+      html: truncate(`<${element.localName}${attributes}>`, PICK_MAX_HTML_CHARS),
+      text: text ? truncate(text, PICK_MAX_TEXT_CHARS) : undefined,
+    };
+  }
+
+  // Hover asks once per frame, and innerText on a large section forces layout,
+  // so only the rect is re-read while the pointer stays on the same element.
+  // Clicks ask for fresh details since the page may have changed the element.
+  let lastPick = null;
+
+  function describePickTarget(element, fresh) {
+    if (fresh || lastPick?.element !== element) {
+      lastPick = { element, details: describePickElement(element) };
+    }
+    const rect = element.getBoundingClientRect();
+    return {
+      rect: { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+      ...lastPick.details,
+    };
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      capabilities: PICK_CAPABILITIES,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_PICK") {
+      const element = resolvePickTarget(event.data.x, event.data.y);
+      postToTrustedTop({
+        type: "INLINE_EDIT_PICK_RESULT",
+        seq: event.data.seq,
+        target: element ? describePickTarget(element, event.data.fresh === true) : null,
+      });
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
+      const { deltaX, deltaY, deltaMode } = event.data;
+      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
+      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
+      const lineHeight =
+        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
+      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
+      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
+      // The selection overlay receives the wheel event instead of this iframe.
+      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
+      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>
